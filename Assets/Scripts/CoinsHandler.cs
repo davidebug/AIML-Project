@@ -5,7 +5,7 @@ public class CoinsHandler : MonoBehaviour
     public bool respawn;
     public GameAreaHandler myArea;
 
-    public void OnEaten()
+    public void OnPick()
     {
         if (respawn)
         {

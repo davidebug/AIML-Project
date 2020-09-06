@@ -252,22 +252,11 @@ public class CollectorAgent : Agent
         if (collision.gameObject.CompareTag("food"))
         {
             Satiate();
-            collision.gameObject.GetComponent<CoinsHandler>().OnEaten();
+            collision.gameObject.GetComponent<CoinsHandler>().OnPick();
             AddReward(1f);
             if (contribute)
             {
                 m_FoodCollecterSettings.totalScore += 1;
-            }
-        }
-        if (collision.gameObject.CompareTag("badFood"))
-        {
-            Poison();
-            collision.gameObject.GetComponent<CoinsHandler>().OnEaten();
-
-            AddReward(-1f);
-            if (contribute)
-            {
-                m_FoodCollecterSettings.totalScore -= 1;
             }
         }
     }

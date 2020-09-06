@@ -213,13 +213,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8954968326279187500}
-  - component: {fileID: 8980495946608221558}
   - component: {fileID: 8974248366466572512}
   - component: {fileID: 9070131115907353892}
   - component: {fileID: 9069780449711836458}
   - component: {fileID: 7836231726438151531}
   - component: {fileID: 6942778239376043366}
   - component: {fileID: 4066951425300918258}
+  - component: {fileID: 1105688754662114451}
   m_Layer: 0
   m_Name: Agent
   m_TagString: agent
@@ -243,19 +243,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8980495946608221558
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8956805676539501288}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8974248366466572512
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -264,7 +251,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8956805676539501288}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 30
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -381,6 +368,20 @@ MonoBehaviour:
   myLaser: {fileID: 8955993487202574716}
   contribute: 0
   useVectorObs: 1
+--- !u!136 &1105688754662114451
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956805676539501288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8957062649650597278
 GameObject:
   m_ObjectHideFlags: 0

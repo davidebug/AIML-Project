@@ -27,13 +27,15 @@ public class GameSettingsHandler : MonoBehaviour
 
         agents = GameObject.FindGameObjectsWithTag("agent");
         listArea = FindObjectsOfType<GameAreaHandler>();
-        foreach (var fa in listArea)
+        foreach (var area in listArea)
         {
-            fa.ResetFoodArea(agents);
+            area.ResetArea(agents);
         }
 
         totalScore = 0;
     }
+
+
 
     void ClearObjects(GameObject[] objects)
     {
