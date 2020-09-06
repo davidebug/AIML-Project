@@ -263,12 +263,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: {fileID: 8452551931208242434, guid: ad524e64e6bf2f24fac1a4128cdb2079, type: 3}
-  numFood: 17
+  numFood: 20
   respawnFood: 1
   range: 45
   scalableMaterial: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
-  minObstacles: 3
-  maxObstacles: 6
+  maxObstacles: 30
   obstacle: {fileID: 3265084417618046707, guid: eb68ded9b88a90d45837387431ee703e,
     type: 3}
 --- !u!1 &473843472028701810
@@ -298,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473843472028701810}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5060, y: 60, z: 80}
+  m_LocalPosition: {x: -4943, y: 60, z: 80}
   m_LocalScale: {x: 10000.001, y: 200, z: 100}
   m_Children: []
   m_Father: {fileID: 4534035899647546}
@@ -391,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3084124671445867657}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5130, y: 60, z: 40}
+  m_LocalPosition: {x: 5015, y: 60, z: 40}
   m_LocalScale: {x: 10000.001, y: 200, z: 100}
   m_Children: []
   m_Father: {fileID: 4534035899647546}

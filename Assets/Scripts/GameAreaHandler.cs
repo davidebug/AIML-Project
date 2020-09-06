@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
-    public class GameArea : MonoBehaviour
-    {
-
-    }
-
-public class GameAreaHandler : GameArea
+public class GameAreaHandler : MonoBehaviour
 {
     public GameObject food;
     public int numFood;
     public bool respawnFood;
     public float range;
-
     public Material scalableMaterial;
-    public int minObstacles;
     public int maxObstacles;
     public GameObject obstacle;
 
@@ -46,11 +39,9 @@ public class GameAreaHandler : GameArea
 
         
     public void placeObstacles(){
-        int num = Random.Range(minObstacles,maxObstacles);
-        for (int i = 0; i < num; i++)
+        for (int i = 0; i < maxObstacles; i++)
         {
-            getNewObstacle();
-            
+            generateNewObstacle();          
         }
     }
 
@@ -58,25 +49,23 @@ public class GameAreaHandler : GameArea
         placeObstacles();
     }
 
-    GameObject getNewObstacle(){
+    void generateNewObstacle(){
         GameObject newObstacle = Instantiate(obstacle, new Vector3(Random.Range(-range, range), 1f,
                 Random.Range(-range, range)) + transform.position,
                 Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f))));
-        bool isScalable = 10 > Random.Range(4.0f,20.0f);        
-        bool isThin = 10 < Random.Range(2.0f,20.0f);       
+        bool isScalable = 10 > Random.Range(0.0f,14.0f);        
+        bool isThin = 10 > Random.Range(0.0f,20.0f);       
         if(isScalable && !isThin){
             newObstacle.GetComponentInChildren<Renderer>().material = scalableMaterial;
         }
-        newObstacle.transform.localScale = new Vector3( isThin && !isScalable ? 1.0f : isScalable ? Random.Range(30f,50f) :  Random.Range(10.0f,40.0f),
-            isScalable && !isThin ? 2f : Random.Range(10.0f,30.0f) ,isScalable ? Random.Range(30.0f,50.0f) : Random.Range(10f,40f));
+        newObstacle.transform.localScale = new Vector3( isThin && !isScalable ? 1.0f : isScalable ? Random.Range(20f,50f) :  Random.Range(10.0f,40.0f),
+            isScalable && !isThin ? 2f : Random.Range(10.0f,30.0f) ,isScalable ? Random.Range(20.0f,50.0f) : Random.Range(10f,40f));
         if(!isObstacleValid(newObstacle)){
+            newObstacle.SetActive(false);
             Destroy(newObstacle);
-            return getNewObstacle();
         }
-        return newObstacle;
     }
 
-    //TODO: obstacle validation
     bool isObstacleValid(GameObject newObstacle){
         return newObstacle.GetComponent<ObstacleValidator>().isWallValid();
     }
