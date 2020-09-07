@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 8956805676539501288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -34.2, y: 2, z: -9.559753}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 8960056967339489870}
   - {fileID: 8960038334218462930}
@@ -301,8 +301,8 @@ MonoBehaviour:
   - food
   - agent
   - wall
-  - badFood
-  - frozenAgent
+  - obstacle
+  - agent
   m_RaysPerDirection: 3
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
@@ -359,12 +359,8 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
   area: {fileID: 0}
-  turnSpeed: 300
-  moveSpeed: 2
-  normalMaterial: {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
-  badMaterial: {fileID: 2100000, guid: a1daf31cdf41e484ca9ac33a5c6f524a, type: 2}
-  goodMaterial: {fileID: 2100000, guid: a09ffeb044a1d89499e880ce9790458d, type: 2}
-  frozenMaterial: {fileID: 2100000, guid: 262d8cbc02b104990841408098431457, type: 2}
+  agentMaterial: {fileID: 2100000, guid: 52eab8ab5010f438fab93da85735ba1d, type: 2}
+  rewardMaterial: {fileID: 2100000, guid: a09ffeb044a1d89499e880ce9790458d, type: 2}
   myLaser: {fileID: 8955993487202574716}
   contribute: 0
   useVectorObs: 1

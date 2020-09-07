@@ -1,28 +1,28 @@
 ﻿using UnityEngine;
 public class GameAreaHandler : MonoBehaviour
 {
-    public GameObject food;
-    public int numFood;
-    public bool respawnFood;
+    public GameObject coin;
+    public int numCoins;
     public float range;
     public Material scalableMaterial;
     public int maxObstacles;
     public GameObject obstacle;
 
-    void CreateFood(int num, GameObject type)
+    void GenerateCoins(int num, GameObject type)
     {
         for (int i = 0; i < num; i++)
         {
             GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
                 Random.Range(-range, range)) + transform.position,
                 Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f))));
-            f.GetComponent<CoinsHandler>().respawn = respawnFood;
-            f.GetComponent<CoinsHandler>().myArea = this;
+            f.GetComponent<CoinsHandler>().gameArea = this;
         }
     }
 
     public void ResetArea(GameObject[] agents)
     {
+        placeObstacles();    
+        GenerateCoins(numCoins, coin);
         foreach (GameObject agent in agents)
         {
             if (agent.transform.parent == gameObject.transform)
@@ -32,9 +32,7 @@ public class GameAreaHandler : MonoBehaviour
                     + transform.position;
                 agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360f)));
             }
-        }
-
-        CreateFood(numFood, food);
+        }         
     }
 
         
@@ -43,10 +41,6 @@ public class GameAreaHandler : MonoBehaviour
         {
             generateNewObstacle();          
         }
-    }
-
-    public void Start(){
-        placeObstacles();
     }
 
     void generateNewObstacle(){

@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agents: []
-  listArea: []
+  areaList: []
   totalScore: 0
   scoreText: {fileID: 1541234920}
 --- !u!1 &561748797
@@ -680,5 +680,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1574612064367889273, guid: a831c995f491ce446bce05d726322dbb,
         type: 3}
+    - target: {fileID: 5789381647948853021, guid: 9eec28ac6bdb4e04c9364280071c259f,
+        type: 3}
+      propertyPath: contribute
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eec28ac6bdb4e04c9364280071c259f, type: 3}

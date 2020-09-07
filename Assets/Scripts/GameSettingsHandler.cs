@@ -7,9 +7,7 @@ public class GameSettingsHandler : MonoBehaviour
     [HideInInspector]
     public GameObject[] agents;
     [HideInInspector]
-    public GameAreaHandler[] listArea;
-
-
+    public GameAreaHandler[] areaList;
     public int totalScore;
     public Text scoreText;
 
@@ -23,14 +21,12 @@ public class GameSettingsHandler : MonoBehaviour
 
     void EnvironmentReset()
     {
-        ClearObjects(GameObject.FindGameObjectsWithTag("food"));
-
+        ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
+        ClearObjects(GameObject.FindGameObjectsWithTag("coin"));    
         agents = GameObject.FindGameObjectsWithTag("agent");
-        listArea = FindObjectsOfType<GameAreaHandler>();
-        foreach (var area in listArea)
-        {
+        areaList = FindObjectsOfType<GameAreaHandler>();
+        foreach (var area in areaList)
             area.ResetArea(agents);
-        }
 
         totalScore = 0;
     }
@@ -39,10 +35,8 @@ public class GameSettingsHandler : MonoBehaviour
 
     void ClearObjects(GameObject[] objects)
     {
-        foreach (var food in objects)
-        {
-            Destroy(food);
-        }
+        foreach (var obj in objects)
+            Destroy(obj);
     }
 
 

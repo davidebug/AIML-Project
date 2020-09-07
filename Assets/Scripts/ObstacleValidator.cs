@@ -24,8 +24,8 @@ public class ObstacleValidator : MonoBehaviour
     
     public bool isWallValid(){
         CheckCollisions();
-        Debug.Log("NumWallCollisions -->> "+ numWallCollisions);
-        Debug.Log("NumOtherCollisions -->> "+ numOtherCollisions);
+        // Debug.Log("NumWallCollisions -->> "+ numWallCollisions);
+        // Debug.Log("NumOtherCollisions -->> "+ numOtherCollisions);
         return numWallCollisions < 2 && numOtherCollisions < 2;
     }
 

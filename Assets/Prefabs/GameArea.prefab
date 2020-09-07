@@ -262,9 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ae2ecbf592d754ebaa98c7c587de08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 8452551931208242434, guid: ad524e64e6bf2f24fac1a4128cdb2079, type: 3}
-  numFood: 20
-  respawnFood: 1
+  coin: {fileID: 8452551931208242434, guid: ad524e64e6bf2f24fac1a4128cdb2079, type: 3}
+  numCoins: 20
   range: 45
   scalableMaterial: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
   maxObstacles: 30
@@ -749,6 +748,11 @@ PrefabInstance:
       propertyPath: normalMaterial
       value: 
       objectReference: {fileID: 2100000, guid: eaad04b0e0dec42229c9cb00a981d7ac, type: 2}
+    - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: agentMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 88b9ae7af2c1748a0a1f63407587a601, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -839,6 +843,11 @@ PrefabInstance:
       propertyPath: normalMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 52eab8ab5010f438fab93da85735ba1d, type: 2}
+    - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: agentMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -924,6 +933,11 @@ PrefabInstance:
       propertyPath: area
       value: 
       objectReference: {fileID: 1819751139121548}
+    - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: agentMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x

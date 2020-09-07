@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class CoinsHandler : MonoBehaviour
 {
-    public bool respawn;
-    public GameAreaHandler myArea;
+    [HideInInspector]
+    public GameAreaHandler gameArea;
 
     public void OnPick()
     {
-        if (respawn)
-        {
-            transform.position = new Vector3(Random.Range(-myArea.range, myArea.range),
+            transform.position = new Vector3(Random.Range(-gameArea.range, gameArea.range),
                 3f,
-                Random.Range(-myArea.range, myArea.range)) + myArea.transform.position;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+                Random.Range(-gameArea.range, gameArea.range)) + gameArea.transform.position;
     }
 
     public void Update(){
