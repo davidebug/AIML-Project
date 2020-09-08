@@ -5,42 +5,14 @@ public class GameAreaHandler : MonoBehaviour
     public int numCoins;
     public float range;
     public Material scalableMaterial;
-    public int maxObstacles;
     public GameObject obstacle;
+    public int maxObstacles;
 
-    void GenerateCoins(int num, GameObject type)
-    {
-        for (int i = 0; i < num; i++)
-        {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
-                Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f))));
-            f.GetComponent<CoinsHandler>().gameArea = this;
-        }
-    }
 
-    public void ResetArea(GameObject[] agents)
-    {
-        placeObstacles();    
-        GenerateCoins(numCoins, coin);
-        foreach (GameObject agent in agents)
-        {
-            if (agent.transform.parent == gameObject.transform)
-            {
-                agent.transform.position = new Vector3(Random.Range(-range, range), 2f,
-                    Random.Range(-range, range))
-                    + transform.position;
-                agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360f)));
-            }
-        }         
-    }
 
-        
-    public void placeObstacles(){
+     public void placeObstacles(){
         for (int i = 0; i < maxObstacles; i++)
-        {
             generateNewObstacle();          
-        }
     }
 
     void generateNewObstacle(){
@@ -62,5 +34,28 @@ public class GameAreaHandler : MonoBehaviour
 
     bool isObstacleValid(GameObject newObstacle){
         return newObstacle.GetComponent<ObstacleValidator>().isWallValid();
+    }
+
+    void GenerateCoins(){
+        for (int i = 0; i < numCoins; i++)
+        {
+            GameObject f = Instantiate(coin, new Vector3(Random.Range(-range, range), 1f,
+                Random.Range(-range, range)) + transform.position,
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f))));
+            f.GetComponent<CoinsHandler>().gameArea = this;
+        }
+    }
+
+    public void ResetArea(GameObject[] agents){
+        placeObstacles();    
+        GenerateCoins();
+        foreach (GameObject agent in agents){
+            if (agent.transform.parent == gameObject.transform){
+                agent.transform.position = new Vector3(Random.Range(-range, range), 2f,
+                    Random.Range(-range, range))
+                    + transform.position;
+                agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360f)));
+            }
+        }         
     }
 }

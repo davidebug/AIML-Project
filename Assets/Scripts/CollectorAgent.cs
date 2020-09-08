@@ -4,6 +4,7 @@ using Unity.MLAgents.Sensors;
 
 public class CollectorAgent : Agent
 {
+    public int agentTag;
     GameSettingsHandler gameSettingsHandler;
     public GameObject area;
     GameAreaHandler gameAreaHandler;
@@ -16,13 +17,11 @@ public class CollectorAgent : Agent
     public Material agentMaterial;
     public Material rewardMaterial;
     public GameObject myLaser;
-    public bool contribute;
     public bool useVectorObs;
 
     EnvironmentParameters m_ResetParams;
 
-    public override void Initialize()
-    {
+    public override void Initialize(){
         m_AgentRb = GetComponent<Rigidbody>();
         gameAreaHandler = area.GetComponent<GameAreaHandler>();
         gameSettingsHandler = FindObjectOfType<GameSettingsHandler>();
@@ -30,10 +29,8 @@ public class CollectorAgent : Agent
 
     }
 
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        if (useVectorObs)
-        {
+    public override void CollectObservations(VectorSensor sensor){
+        if (useVectorObs){
             var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
             sensor.AddObservation(localVelocity.x);
             sensor.AddObservation(localVelocity.z);
@@ -43,15 +40,13 @@ public class CollectorAgent : Agent
     }
 
 
-    void setRewardState()
-    {
+    void setRewardState(){
         gotReward = true;
         chengeStateTime = Time.time;
         gameObject.GetComponentInChildren<Renderer>().material = rewardMaterial;
     }
 
-    void setNormalState()
-    {
+    void setNormalState(){
         gotReward = false;
         gameObject.GetComponentInChildren<Renderer>().material = agentMaterial;
     }
@@ -60,8 +55,7 @@ public class CollectorAgent : Agent
     {
         m_Shoot = false;
 
-        if (Time.time > chengeStateTime + 0.5f)
-        {
+        if (Time.time > chengeStateTime + 0.5f){
             if (gotReward)
             {
                 setNormalState();
@@ -78,8 +72,7 @@ public class CollectorAgent : Agent
         var rotateAxis = (int)vectorAction[2];
         var shootAxis = (int)vectorAction[3];
 
-        switch (forwardAxis)
-        {
+        switch (forwardAxis){
             case 1:
                 dirToGo = transform.forward;
                 break;
@@ -88,8 +81,7 @@ public class CollectorAgent : Agent
                 break;
         }
 
-        switch (rightAxis)
-        {
+        switch (rightAxis){
             case 1:
                 dirToGo = transform.right;
                 break;
@@ -98,8 +90,7 @@ public class CollectorAgent : Agent
                 break;
         }
 
-        switch (rotateAxis)
-        {
+        switch (rotateAxis){
             case 1:
                 rotateDir = -transform.up;
                 break;
@@ -107,14 +98,12 @@ public class CollectorAgent : Agent
                 rotateDir = transform.up;
                 break;
         }
-        switch (shootAxis)
-        {
+        switch (shootAxis){
             case 1:
                 shootCommand = true;
                 break;
         }
-        if (shootCommand)
-        {
+        if (shootCommand){
             m_Shoot = true;
             dirToGo *= 0.5f;
             m_AgentRb.velocity *= 0.75f;
@@ -123,23 +112,19 @@ public class CollectorAgent : Agent
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
     
 
-        if (m_AgentRb.velocity.sqrMagnitude > 25f) // slow it down
-        {
+        if (m_AgentRb.velocity.sqrMagnitude > 25f){
             m_AgentRb.velocity *= 0.95f;
         }
 
-        if (m_Shoot)
-        {
+        if (m_Shoot){
             var myTransform = transform;
             myLaser.transform.localScale = new Vector3(1f, 1f, 1f);
             var rayDir = 25.0f * myTransform.forward;
             Debug.DrawRay(myTransform.position, rayDir, Color.red, 0f, true);
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 2f, rayDir, out hit, 25f))
-            {
-                if (hit.collider.gameObject.CompareTag("agent"))
-                {
-                    
+            if (Physics.SphereCast(transform.position, 2f, rayDir, out hit, 25f)){
+                if (hit.collider.gameObject.CompareTag("agent")){
+                    //Shoot?
                 }
             }
         }
@@ -149,32 +134,22 @@ public class CollectorAgent : Agent
         }
     }
 
-    public override void Heuristic(float[] actionsOut)
-    {
+    public override void Heuristic(float[] actionsOut){
         actionsOut[0] = 0f;
         actionsOut[1] = 0f;
         actionsOut[2] = 0f;
         if (Input.GetKey(KeyCode.D))
-        {
             actionsOut[2] = 2f;
-        }
         if (Input.GetKey(KeyCode.W))
-        {
             actionsOut[0] = 1f;
-        }
         if (Input.GetKey(KeyCode.A))
-        {
             actionsOut[2] = 1f;
-        }
         if (Input.GetKey(KeyCode.S))
-        {
             actionsOut[0] = 2f;
-        }
         actionsOut[3] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
     }
 
-    public override void OnEpisodeBegin()
-    {
+    public override void OnEpisodeBegin(){
         setNormalState();
         m_Shoot = false;
         m_AgentRb.velocity = Vector3.zero;
@@ -186,22 +161,28 @@ public class CollectorAgent : Agent
 
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("food"))
-        {
+    void OnCollisionEnter(Collision collision){
+        if (collision.gameObject.CompareTag("food")){
             setRewardState();
             collision.gameObject.GetComponent<CoinsHandler>().OnPick();
             AddReward(1f);
-            if (contribute)
-            {
-                gameSettingsHandler.totalScore += 1;
+            switch(agentTag){
+                case 2:
+                    gameSettingsHandler.score2 += 1;
+                    break;
+                case 3:
+                    gameSettingsHandler.score3 += 1;
+                    break;
+                case 4:
+                    gameSettingsHandler.score4 += 1;
+                    break;
+                default:
+                    gameSettingsHandler.score1 += 1;
+                    break;
             }
         }
-        if (collision.gameObject.CompareTag("obstacle"))
-        {
-            AddReward(-0.5f);
-            
+        if (collision.gameObject.CompareTag("obstacle")){
+            AddReward(-0.5f);           
         }
     }
 }
