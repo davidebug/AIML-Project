@@ -23,6 +23,7 @@ public class GameAreaHandler : MonoBehaviour
         bool isThin = 10 > Random.Range(0.0f,20.0f);       
         if(isScalable && !isThin){
             newObstacle.GetComponentInChildren<Renderer>().material = scalableMaterial;
+            newObstacle.gameObject.tag = "scalableObstacle";
         }
         newObstacle.transform.localScale = new Vector3( isThin && !isScalable ? 1.0f : isScalable ? Random.Range(20f,50f) :  Random.Range(10.0f,40.0f),
             isScalable && !isThin ? 2f : Random.Range(10.0f,30.0f) ,isScalable ? Random.Range(20.0f,50.0f) : Random.Range(10f,40f));

@@ -32,6 +32,7 @@ TagManager:
   - obstacle
   - coin
   - agentScore
+  - scalableObstacle
   layers:
   - Default
   - TransparentFX

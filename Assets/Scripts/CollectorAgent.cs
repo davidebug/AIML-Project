@@ -8,41 +8,44 @@ public class CollectorAgent : Agent
     GameSettingsHandler gameSettingsHandler;
     public GameObject area;
     GameAreaHandler gameAreaHandler;
-    bool gotReward;
-    bool m_Shoot;
-    float chengeStateTime;
-    Rigidbody m_AgentRb;
+    bool environmentStarted;
+    bool jump;
+    bool isOnScalable;
+    bool isOnGround;
+    float changeStateTime;
+    Rigidbody agentRigidBody;
     float turnSpeed = 300;
-    float speed = 2;
+    float speed = 2.5f;
+    bool gotReward;
+    bool isFloating;
     public Material agentMaterial;
     public Material rewardMaterial;
-    public GameObject myLaser;
     public bool useVectorObs;
 
-    EnvironmentParameters m_ResetParams;
+    EnvironmentParameters ResetParams;
 
     public override void Initialize(){
-        m_AgentRb = GetComponent<Rigidbody>();
+        agentRigidBody = GetComponent<Rigidbody>();
         gameAreaHandler = area.GetComponent<GameAreaHandler>();
         gameSettingsHandler = FindObjectOfType<GameSettingsHandler>();
-        m_ResetParams = Academy.Instance.EnvironmentParameters;
+        ResetParams = Academy.Instance.EnvironmentParameters;
 
     }
 
     public override void CollectObservations(VectorSensor sensor){
         if (useVectorObs){
-            var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
+            var localVelocity = transform.InverseTransformDirection(agentRigidBody.velocity);
             sensor.AddObservation(localVelocity.x);
             sensor.AddObservation(localVelocity.z);
-            sensor.AddObservation(false);
-            sensor.AddObservation(m_Shoot);
+            sensor.AddObservation(isOnScalable);
+            sensor.AddObservation(jump);          
         }
     }
 
 
     void setRewardState(){
         gotReward = true;
-        chengeStateTime = Time.time;
+        changeStateTime = Time.time;
         gameObject.GetComponentInChildren<Renderer>().material = rewardMaterial;
     }
 
@@ -51,86 +54,79 @@ public class CollectorAgent : Agent
         gameObject.GetComponentInChildren<Renderer>().material = agentMaterial;
     }
 
-    public override void OnActionReceived(float[] vectorAction)
-    {
-        m_Shoot = false;
+    void checkJumpReward(){
+        isFloating = !isOnGround && !isOnScalable;
+        if(!isFloating){
+            if(isOnScalable){
+                setRewardState();
+                AddReward(0.30f);
+            }
+            else if(isOnGround){
+                AddReward(-0.005f);
+            }
+        }
+    }
+    public override void OnActionReceived(float[] vectorAction){
 
-        if (Time.time > chengeStateTime + 0.5f){
-            if (gotReward)
-            {
+         if (Time.time > changeStateTime + 0.5f){
+            if (gotReward){
                 setNormalState();
             }
         }
+        isOnScalable =  CheckGround("scalableObstacle");
+        isOnGround = CheckGround("ground");
+        if(isFloating){
+           checkJumpReward();
+        }
+        var direction = Vector3.zero;
+        var rotation = Vector3.zero;
+        var forwardInput = (int)vectorAction[0];
+        var rightInput = (int)vectorAction[1];
+        var rotateInput = (int)vectorAction[2];
+        var jumpInput = (int)vectorAction[3];
 
-        var dirToGo = Vector3.zero;
-        var rotateDir = Vector3.zero;
-
-
-        var shootCommand = false;
-        var forwardAxis = (int)vectorAction[0];
-        var rightAxis = (int)vectorAction[1];
-        var rotateAxis = (int)vectorAction[2];
-        var shootAxis = (int)vectorAction[3];
-
-        switch (forwardAxis){
+        switch (forwardInput){
             case 1:
-                dirToGo = transform.forward;
+                direction = transform.forward;
                 break;
             case 2:
-                dirToGo = -transform.forward;
+                direction = -transform.forward;
                 break;
         }
-
-        switch (rightAxis){
+        switch (rightInput){
             case 1:
-                dirToGo = transform.right;
+                direction = transform.right;
                 break;
             case 2:
-                dirToGo = -transform.right;
+                direction = -transform.right;
                 break;
         }
-
-        switch (rotateAxis){
+        switch (rotateInput){
             case 1:
-                rotateDir = -transform.up;
+                rotation = -transform.up;
                 break;
             case 2:
-                rotateDir = transform.up;
+                rotation = transform.up;
                 break;
         }
-        switch (shootAxis){
+        switch (jumpInput){
             case 1:
-                shootCommand = true;
+                direction *= 0.2f;
+                agentRigidBody.velocity *= 0.75f;
+                jump = true;
                 break;
         }
-        if (shootCommand){
-            m_Shoot = true;
-            dirToGo *= 0.5f;
-            m_AgentRb.velocity *= 0.75f;
-        }
-        m_AgentRb.AddForce(dirToGo * speed, ForceMode.VelocityChange);
-        transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
-    
 
-        if (m_AgentRb.velocity.sqrMagnitude > 25f){
-            m_AgentRb.velocity *= 0.95f;
+        agentRigidBody.AddForce(direction * speed, ForceMode.VelocityChange);
+        transform.Rotate(rotation, Time.fixedDeltaTime * turnSpeed);
+        
+        if (agentRigidBody.velocity.sqrMagnitude > 25f){
+            agentRigidBody.velocity *= 0.95f;
         }
-
-        if (m_Shoot){
-            var myTransform = transform;
-            myLaser.transform.localScale = new Vector3(1f, 1f, 1f);
-            var rayDir = 25.0f * myTransform.forward;
-            Debug.DrawRay(myTransform.position, rayDir, Color.red, 0f, true);
-            RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 2f, rayDir, out hit, 25f)){
-                if (hit.collider.gameObject.CompareTag("agent")){
-                    //Shoot?
-                }
-            }
-        }
-        else
-        {
-            myLaser.transform.localScale = new Vector3(0f, 0f, 0f);
+        if(jump && isOnGround && !isFloating && !isOnScalable){                 
+                    agentRigidBody.AddForce(
+                    Vector3.up * 700, ForceMode.Impulse);
+                isFloating = true;                              
         }
     }
 
@@ -149,23 +145,35 @@ public class CollectorAgent : Agent
         actionsOut[3] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
     }
 
+        bool CheckGround(string objTag){
+        RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.down, out hit,
+                1f);
+
+            if (hit.collider != null &&
+                (hit.collider.CompareTag(objTag)
+                && hit.normal.y > 0.95f)){
+                // Debug.Log("Agent"+agentTag.ToString()+" -->"+objTag);
+                return true;
+            }
+
+            return false;
+    }
     public override void OnEpisodeBegin(){
         setNormalState();
-        m_Shoot = false;
-        m_AgentRb.velocity = Vector3.zero;
-        myLaser.transform.localScale = new Vector3(0f, 0f, 0f);
-        transform.position = new Vector3(Random.Range(-gameAreaHandler.range, gameAreaHandler.range),
-            2f, Random.Range(-gameAreaHandler.range, gameAreaHandler.range))
-            + area.transform.position;
+        var rayDir = 0.5f * transform.forward;
+        isOnScalable = CheckGround("scalableObstacle");
+        jump = false;
+        agentRigidBody.velocity = Vector3.zero;
+        gameSettingsHandler.EnvironmentReset();
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
-
     }
 
     void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("food")){
+        if (collision.gameObject.CompareTag("coin")){
             setRewardState();
             collision.gameObject.GetComponent<CoinsHandler>().OnPick();
-            AddReward(1f);
+            AddReward(1.5f);
             switch(agentTag){
                 case 2:
                     gameSettingsHandler.score2 += 1;
@@ -182,7 +190,13 @@ public class CollectorAgent : Agent
             }
         }
         if (collision.gameObject.CompareTag("obstacle")){
-            AddReward(-0.5f);           
+            AddReward(-0.40f);           
+        }
+        if (collision.gameObject.CompareTag("scalableObstacle") && !isOnScalable){
+            AddReward(-0.005f);           
+        }
+        if (collision.gameObject.CompareTag("wall")){
+            AddReward(-0.20f);           
         }
     }
 }

@@ -23,10 +23,12 @@ public class GameSettingsHandler : MonoBehaviour
     public void Awake(){
         Academy.Instance.OnEnvironmentReset += EnvironmentReset;
         m_Recorder = Academy.Instance.StatsRecorder;
+        Physics.gravity = Physics.gravity *= 8;
     }
 
-    void EnvironmentReset(){
+    public void EnvironmentReset(){
         ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
+        ClearObjects(GameObject.FindGameObjectsWithTag("scalableObstacle"));
         ClearObjects(GameObject.FindGameObjectsWithTag("coin"));    
         agents = GameObject.FindGameObjectsWithTag("agent");
         areaList = FindObjectsOfType<GameAreaHandler>();
@@ -39,8 +41,10 @@ public class GameSettingsHandler : MonoBehaviour
 
 
     void ClearObjects(GameObject[] objects){
-        foreach (var obj in objects)
+        foreach (var obj in objects){
+            obj.SetActive(false);
             Destroy(obj);
+        }    
     }
 
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 326328804835724055}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: food
+  m_TagString: coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

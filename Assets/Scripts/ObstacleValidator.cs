@@ -15,7 +15,7 @@ public class ObstacleValidator : MonoBehaviour
         {
             if(hitColliders[i].gameObject.tag == "wall")
                 numWallCollisions++;
-            else if(hitColliders[i].gameObject.tag == "obstacle"){
+            else if(hitColliders[i].gameObject.tag == "obstacle" || hitColliders[i].gameObject.tag == "scalableObstacle"){
                 numOtherCollisions++;
             }
         }
@@ -24,8 +24,6 @@ public class ObstacleValidator : MonoBehaviour
     
     public bool isWallValid(){
         CheckCollisions();
-        // Debug.Log("NumWallCollisions -->> "+ numWallCollisions);
-        // Debug.Log("NumOtherCollisions -->> "+ numOtherCollisions);
         return numWallCollisions < 2 && numOtherCollisions < 2;
     }
 
