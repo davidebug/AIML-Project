@@ -74,7 +74,7 @@ public class CollectorAgent : Agent
                 AddReward(0.40f);
             }
             else if(isOnGround){
-                AddReward(-0.20f);
+                AddReward(-0.025f);
             }
         }
     }
@@ -93,9 +93,8 @@ public class CollectorAgent : Agent
         var direction = Vector3.zero;
         var rotation = Vector3.zero;
         var forwardInput = (int)vectorAction[0];
-        var rightInput = (int)vectorAction[1];
-        var rotateInput = (int)vectorAction[2];
-        var jumpInput = (int)vectorAction[3];
+        var rotateInput = (int)vectorAction[1];
+        var jumpInput = (int)vectorAction[2];
 
         switch (forwardInput){
             case 1:
@@ -103,14 +102,6 @@ public class CollectorAgent : Agent
                 break;
             case 2:
                 direction = -transform.forward;
-                break;
-        }
-        switch (rightInput){
-            case 1:
-                direction = transform.right;
-                break;
-            case 2:
-                direction = -transform.right;
                 break;
         }
         switch (rotateInput){
@@ -141,20 +132,21 @@ public class CollectorAgent : Agent
                 isFloating = true;                              
         }
     }
-
     public override void Heuristic(float[] actionsOut){
-        actionsOut[0] = 0f;
-        actionsOut[1] = 0f;
-        actionsOut[2] = 0f;
-        if (Input.GetKey(KeyCode.D))
-            actionsOut[2] = 2f;
-        if (Input.GetKey(KeyCode.W))
+        System.Array.Clear(actionsOut, 0, actionsOut.Length);
+        if (Input.GetKey(KeyCode.D)){
+            actionsOut[1] = 2f;
+        }
+        if (Input.GetKey(KeyCode.W)){
             actionsOut[0] = 1f;
-        if (Input.GetKey(KeyCode.A))
-            actionsOut[2] = 1f;
-        if (Input.GetKey(KeyCode.S))
+        }
+        if (Input.GetKey(KeyCode.A)){
+            actionsOut[1] = 1f;
+        }
+        if (Input.GetKey(KeyCode.S)){
             actionsOut[0] = 2f;
-        actionsOut[3] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
+        }
+        actionsOut[2] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
     }
 
         bool CheckGround(string objTag){
@@ -196,8 +188,8 @@ public class CollectorAgent : Agent
                     gamePointsHandler.score1 = score;
                     break;
             }
-            if(score == 5){
-                AddReward(10f);
+            if(score == 10){
+                AddReward(6f);
                 EndEpisode();
             }
         }
@@ -205,7 +197,7 @@ public class CollectorAgent : Agent
             AddReward(-0.20f);           
         }
         if (collision.gameObject.CompareTag("scalableObstacle") && !isOnScalable){
-            AddReward(-0.005f);           
+            AddReward(-0.05f);           
         }
         if (collision.gameObject.CompareTag("wall")){
             AddReward(-0.20f);           

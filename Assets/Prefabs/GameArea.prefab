@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 8452551931208242434, guid: ad524e64e6bf2f24fac1a4128cdb2079, type: 3}
-  numCoins: 50
+  numCoins: 40
   range: 45
   scalableMaterial: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
   obstacle: {fileID: 3265084417618046707, guid: eb68ded9b88a90d45837387431ee703e,
