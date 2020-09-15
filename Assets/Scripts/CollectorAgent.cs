@@ -20,6 +20,8 @@ public class CollectorAgent : Agent
     bool isFloating;
     public Material agentMaterial;
     public Material rewardMaterial;
+
+    public RayPerceptionSensorComponent3D rayPerceptionSensor;
     public bool useVectorObs;
     [HideInInspector]
     public int score;
@@ -49,8 +51,10 @@ public class CollectorAgent : Agent
             sensor.AddObservation(localVelocity.x);
             sensor.AddObservation(localVelocity.z);
             sensor.AddObservation(isOnScalable);
+            sensor.AddObservation(isOnGround);
             sensor.AddObservation(jump);
-            sensor.AddObservation(score);          
+            sensor.AddObservation(score);    
+
         }
     }
 
@@ -66,18 +70,6 @@ public class CollectorAgent : Agent
         gameObject.GetComponentInChildren<Renderer>().material = agentMaterial;
     }
 
-    void checkJumpReward(){
-        isFloating = !isOnGround && !isOnScalable;
-        if(!isFloating){
-            if(isOnScalable){
-                setRewardState();
-                AddReward(0.40f);
-            }
-            else if(isOnGround){
-                AddReward(-0.025f);
-            }
-        }
-    }
     public override void OnActionReceived(float[] vectorAction){
 
          if (Time.time > changeStateTime + 0.5f){
@@ -85,11 +77,11 @@ public class CollectorAgent : Agent
                 setNormalState();
             }
         }
+
         isOnScalable =  CheckGround("scalableObstacle");
         isOnGround = CheckGround("ground");
-        if(isFloating){
-           checkJumpReward();
-        }
+        isFloating = !isOnGround && !isOnScalable;
+
         var direction = Vector3.zero;
         var rotation = Vector3.zero;
         var forwardInput = (int)vectorAction[0];
@@ -126,10 +118,22 @@ public class CollectorAgent : Agent
         if (agentRigidBody.velocity.sqrMagnitude > 25f){
             agentRigidBody.velocity *= 0.95f;
         }
-        if(jump && isOnGround && !isFloating && !isOnScalable){                 
-                    agentRigidBody.AddForce(
+        if(jump && !isFloating){ 
+            if(isOnScalable){
+                AddReward(-0.30f);
+            } 
+            else if(isOnGround){
+                if(CheckForwardLine("scalableObstacle")){
+                    AddReward(0.40f);
+                    setRewardState();  
+                }
+                else{
+                    AddReward(-0.04f);
+                }
+                agentRigidBody.AddForce(
                     Vector3.up * 700, ForceMode.Impulse);
-                isFloating = true;                              
+                isFloating = true;  
+            }                                     
         }
     }
     public override void Heuristic(float[] actionsOut){
@@ -163,6 +167,18 @@ public class CollectorAgent : Agent
 
             return false;
     }
+
+     bool CheckForwardLine(string objTag){
+        RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.forward, out hit,
+                5f);
+            if (hit.collider != null &&
+                (hit.collider.CompareTag(objTag))){
+                return true;
+            }
+            return false;
+    }
+
     public override void OnEpisodeBegin(){
         gameSettingsHandler.EnvironmentReset();
         gamePointsHandler.OnReset();
@@ -172,7 +188,10 @@ public class CollectorAgent : Agent
         if (collision.gameObject.CompareTag("coin")){
             setRewardState();
             collision.gameObject.GetComponent<CoinsHandler>().OnPick();
-            AddReward(1.5f);
+            if(isOnScalable)
+                AddReward(3f);
+            else    
+                AddReward(1.5f);
             score++;
             switch(agentTag){
                 case 2:
@@ -188,19 +207,16 @@ public class CollectorAgent : Agent
                     gamePointsHandler.score1 = score;
                     break;
             }
-            if(score == 10){
-                AddReward(6f);
+            if(score == 15){
+                AddReward(7f);
                 EndEpisode();
             }
         }
-        if (collision.gameObject.CompareTag("obstacle")){
+        if (collision.gameObject.CompareTag("obstacle") ||collision.gameObject.CompareTag("wall")){
             AddReward(-0.20f);           
         }
         if (collision.gameObject.CompareTag("scalableObstacle") && !isOnScalable){
-            AddReward(-0.05f);           
-        }
-        if (collision.gameObject.CompareTag("wall")){
-            AddReward(-0.20f);           
+            AddReward(-0.10f);           
         }
     }
 }

@@ -1103,6 +1103,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agent1
       objectReference: {fileID: 0}
+    - target: {fileID: 1368735893419501310, guid: 9eec28ac6bdb4e04c9364280071c259f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 2180793489076851723, guid: 9eec28ac6bdb4e04c9364280071c259f,
         type: 3}
       propertyPath: m_Name
