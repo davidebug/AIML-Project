@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190492283346676}
-  m_Mesh: {fileID: 4300002, guid: a9d8f499f5b9848438d280dc28b3b52e, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 282aa8420f644a846aeaf04e20c4dfec, type: 3}
 --- !u!23 &23637226378815632
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36c7baa347d68f347a9aa9698aa1bcdd, type: 2}
+  - {fileID: 2100000, guid: 5ccfa34b5c7a04e4c9314c655aa0f1a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,7 +179,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66163cf35956a4be08e801b750c26f33, type: 2}
+  - {fileID: 2100000, guid: 5980e8078935a344c801a48134b6ccfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,7 +213,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: a9d8f499f5b9848438d280dc28b3b52e, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 282aa8420f644a846aeaf04e20c4dfec, type: 3}
 --- !u!1 &1819751139121548
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   coin: {fileID: 8452551931208242434, guid: ad524e64e6bf2f24fac1a4128cdb2079, type: 3}
   numCoins: 45
   range: 45
-  scalableMaterial: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
+  scalableMaterial: {fileID: 2100000, guid: 8e2cb6b179238f746ab15f138f2eeb82, type: 2}
   obstacle: {fileID: 3265084417618046707, guid: eb68ded9b88a90d45837387431ee703e,
     type: 3}
   maxObstacles: 30
@@ -407,7 +407,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66163cf35956a4be08e801b750c26f33, type: 2}
+  - {fileID: 2100000, guid: 5980e8078935a344c801a48134b6ccfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -578,7 +578,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66163cf35956a4be08e801b750c26f33, type: 2}
+  - {fileID: 2100000, guid: 5980e8078935a344c801a48134b6ccfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -903,7 +903,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66163cf35956a4be08e801b750c26f33, type: 2}
+  - {fileID: 2100000, guid: 5980e8078935a344c801a48134b6ccfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1074,7 +1074,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66163cf35956a4be08e801b750c26f33, type: 2}
+  - {fileID: 2100000, guid: 5980e8078935a344c801a48134b6ccfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1134,7 +1134,7 @@ PrefabInstance:
         type: 3}
       propertyPath: normalMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 69fefdd39d2b34b169e921910bed9c0d, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
@@ -1143,7 +1143,7 @@ PrefabInstance:
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.2
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
@@ -1239,12 +1239,12 @@ PrefabInstance:
         type: 3}
       propertyPath: normalMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: eaad04b0e0dec42229c9cb00a981d7ac, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 88b9ae7af2c1748a0a1f63407587a601, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
@@ -1263,7 +1263,7 @@ PrefabInstance:
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.559753
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
@@ -1349,12 +1349,12 @@ PrefabInstance:
         type: 3}
       propertyPath: normalMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 52eab8ab5010f438fab93da85735ba1d, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c67450f290f3e4897bc40276a619e78d, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
@@ -1363,7 +1363,7 @@ PrefabInstance:
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.2
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
@@ -1373,7 +1373,7 @@ PrefabInstance:
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.559753
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
@@ -1459,7 +1459,7 @@ PrefabInstance:
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
@@ -1478,7 +1478,7 @@ PrefabInstance:
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.559753
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}

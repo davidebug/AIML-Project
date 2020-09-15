@@ -249,7 +249,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f731be6866ce749fd8349e67ae81f76a, type: 2}
+  - {fileID: 2100000, guid: 190297751f8063d4e8331be3f03999d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,7 +282,6 @@ GameObject:
   - component: {fileID: 8974248366466572512}
   - component: {fileID: 9070131115907353892}
   - component: {fileID: 9069780449711836458}
-  - component: {fileID: 7836231726438151531}
   - component: {fileID: 6942778239376043366}
   - component: {fileID: 4066951425300918258}
   - component: {fileID: 1105688754662114451}
@@ -339,12 +338,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     VectorActionSize: 030000000300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 31ab523461bd0fd4c94655b3108e6ac7, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 8a3ff484e72fe9242bab884a6cf7082a, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: CoinAgent
@@ -381,19 +380,6 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
---- !u!114 &7836231726438151531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8956805676539501288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6da8f78a394c6ab027688eab81e04d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugCommandLineOverride: 
 --- !u!114 &6942778239376043366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,8 +412,9 @@ MonoBehaviour:
   MaxStep: 25000
   agentTag: 0
   area: {fileID: 0}
-  agentMaterial: {fileID: 2100000, guid: 52eab8ab5010f438fab93da85735ba1d, type: 2}
-  rewardMaterial: {fileID: 2100000, guid: a09ffeb044a1d89499e880ce9790458d, type: 2}
+  agentMaterial: {fileID: 2100000, guid: 091ae2a9991dea14b848a57f7be35998, type: 2}
+  rewardMaterial: {fileID: 2100000, guid: b0fd845b3b348c44694de5f36b35d8da, type: 2}
+  rayPerceptionSensor: {fileID: 0}
   useVectorObs: 1
   score: 0
 --- !u!136 &1105688754662114451
@@ -506,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -659,7 +646,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f731be6866ce749fd8349e67ae81f76a, type: 2}
+  - {fileID: 2100000, guid: 190297751f8063d4e8331be3f03999d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -738,7 +725,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f731be6866ce749fd8349e67ae81f76a, type: 2}
+  - {fileID: 2100000, guid: 190297751f8063d4e8331be3f03999d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
