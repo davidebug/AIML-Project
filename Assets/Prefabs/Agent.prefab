@@ -343,7 +343,7 @@ MonoBehaviour:
     VectorActionSize: 030000000300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 8a3ff484e72fe9242bab884a6cf7082a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 384d5bb4b6d73bc40981a38c4eb2a399, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: CoinAgent
@@ -493,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6566dd4104b9e6a4fb94409e8727eec5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

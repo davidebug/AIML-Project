@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ccfa34b5c7a04e4c9314c655aa0f1a2, type: 2}
+  - {fileID: 2100000, guid: 9985025ff76ac8d48922438fab2729f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1140,6 +1140,11 @@ PrefabInstance:
       propertyPath: agentTag
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8943548092098555554, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 091ae2a9991dea14b848a57f7be35998, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1244,12 +1249,17 @@ PrefabInstance:
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: b65affcc4e36a354e862d3afb7ca5423, type: 2}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8943548092098555554, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b65affcc4e36a354e862d3afb7ca5423, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1354,12 +1364,17 @@ PrefabInstance:
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 8e2cb6b179238f746ab15f138f2eeb82, type: 2}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8943548092098555554, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e2cb6b179238f746ab15f138f2eeb82, type: 2}
     - target: {fileID: 8954968326279187500, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1459,7 +1474,7 @@ PrefabInstance:
         type: 3}
       propertyPath: agentMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 6566dd4104b9e6a4fb94409e8727eec5, type: 2}
     - target: {fileID: 4066951425300918258, guid: c4199fd9ee0d9a54cbcae9b12c3f5366,
         type: 3}
       propertyPath: agentTag
